@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react"
 import Head from "next/head"
+import Navbar from "./Navbar"
 import Footer from "./Footer"
-import { Container, Divider } from "@chakra-ui/react"
+import { Container } from "@chakra-ui/react"
 
 type Props = {
   children?: ReactNode
@@ -16,6 +17,7 @@ const Layout = ({ children, title }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
+    <Navbar />
     <Container my={6}>{children}</Container>
     <Footer />
   </div>

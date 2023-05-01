@@ -1,13 +1,12 @@
-import { Container } from "@chakra-ui/react"
-import Frodo from "../components/frodo/Frodo"
+import { Heading, Text } from "@chakra-ui/react"
 import Layout from "../components/layout/Layout"
 
-const FrodoPage = () => {
-  return (
-    <Layout title="Frodo">
-      <Frodo />
-    </Layout>
-  )
-}
+const IndexPage = () => (
+  <Layout title="Home">
+    <Heading my="4">
+      Final Project Blog
+    </Heading>
+  </Layout>
+)
 
-export default FrodoPage
+export default IndexPage
