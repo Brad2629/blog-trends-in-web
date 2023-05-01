@@ -14,8 +14,8 @@ const navData: NavLinkData[] = [
     path: "/",
   },
   {
-    name: "Frodo",
-    path: "/frodo",
+    name: "Add",
+    path: "/add",
   },
 ]
 

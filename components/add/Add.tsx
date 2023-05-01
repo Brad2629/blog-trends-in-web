@@ -1,5 +1,5 @@
 import { Heading, VStack } from "@chakra-ui/react";
-import TaskAddControl from "./TaskAddControl";
+import PostAddControl from "./PostAddControl";
 
 const AddHeading = () => (
   <Heading
@@ -13,14 +13,14 @@ const AddHeading = () => (
   </Heading>
 );
 
-const Frodo = () => {
+const Add = () => {
   return (
     <VStack spacing={4}>
       <AddHeading />
-      <TaskAddControl />
+      <PostAddControl />
     </VStack>
   );
 };
 
-export default Frodo;
+export default Add;
 

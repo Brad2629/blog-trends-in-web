@@ -4,11 +4,11 @@ import { FormEventHandler, useState } from "react";
 import { Post } from "../../types";
 import { db } from "../../util/firebase";
 
-const TaskAddControl = () => {
+const PostAddControl = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
-  const addTask: FormEventHandler<HTMLFormElement> = (e) => {
+  const PostAdd: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (title === "" || text === "") return;
     const post: Post = {
@@ -22,7 +22,7 @@ const TaskAddControl = () => {
   };
 
   return (
-    <form onSubmit={addTask}>
+    <form onSubmit={PostAdd}>
       <VStack shouldWrapChildren spacing={4} alignItems="stretch">
         <Input
           value={title}
@@ -47,4 +47,4 @@ const TaskAddControl = () => {
   );
 };
 
-export default TaskAddControl;
+export default PostAddControl;
