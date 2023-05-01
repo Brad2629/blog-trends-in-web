@@ -1,12 +1,7 @@
-import { Heading, Spinner, VStack } from "@chakra-ui/react"
-import { collection, onSnapshot, query } from "firebase/firestore"
-import { useEffect, useState } from "react"
-import { db } from "../../util/firebase"
-import { Task, TaskWithId } from "../../types"
-import TaskAddControl from "./TaskAddControl"
-import TaskList from "./TaskList"
+import { Heading, VStack } from "@chakra-ui/react";
+import TaskAddControl from "./TaskAddControl";
 
-const FrodoHeading = () => (
+const AddHeading = () => (
   <Heading
     as="h1"
     w="fit-content"
@@ -14,33 +9,18 @@ const FrodoHeading = () => (
     bgClip="text"
     lineHeight={1.33}
   >
-    Frodo: My Todo List
+    ADD A NEW POST
   </Heading>
-)
-
-const taskQuery = query(collection(db, "tasks"))
+);
 
 const Frodo = () => {
-  const [tasks, setTasks] = useState<TaskWithId[] | null>(null)
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(taskQuery, (querySnapshot) => {
-      const snapshotTasks: TaskWithId[] = querySnapshot.docs.map((doc) => {
-        const data = doc.data() as Task
-        return { ...data, id: doc.id }
-      })
-      setTasks(snapshotTasks)
-    })
-    return unsubscribe
-  }, [])
-
   return (
     <VStack spacing={4}>
-      <FrodoHeading />
+      <AddHeading />
       <TaskAddControl />
-      {tasks ? <TaskList tasks={tasks} /> : <Spinner />}
     </VStack>
-  )
-}
+  );
+};
 
-export default Frodo
+export default Frodo;
+
