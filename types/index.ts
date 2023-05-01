@@ -1,10 +1,11 @@
-export type Task = {
+export type Post = {
+  title: string
   text: string
-  checked: boolean
+  likes: number
 }
 
-export type TaskId = {
+export type PostId = {
   id: string
 }
 
-export type TaskWithId = Task & TaskId
+export type PostWithId = Post & PostId
