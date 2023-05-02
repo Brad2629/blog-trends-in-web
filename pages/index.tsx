@@ -1,11 +1,10 @@
 import { Heading, Text } from "@chakra-ui/react"
 import Layout from "../components/layout/Layout"
+import Home from "../components/home/Home"
 
 const IndexPage = () => (
   <Layout title="Home">
-    <Heading my="4">
-      Final Project Blog
-    </Heading>
+    <Home />
   </Layout>
 )
 
