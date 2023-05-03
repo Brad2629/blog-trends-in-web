@@ -2,6 +2,7 @@ export type Post = {
   title: string
   text: string
   likes: number
+  owner: string
 }
 
 export type PostId = {

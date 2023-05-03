@@ -2,6 +2,8 @@ import React from "react"
 import NextLink from "next/link"
 import { Box, Button, HStack, Link } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import { useAuth } from "../auth/AuthUserProvider"
+import { signInWithGoogle, signOut } from "../../util/firebase"
 
 type NavLinkData = {
   name: string
@@ -39,10 +41,11 @@ const NavLink = ({ name, path }: NavLinkData) => {
         </Button>
       </Link>
     </NextLink>
-  );
+  )
 }
 
 const Navbar = () => {
+  const { user } = useAuth()
   return (
     <Box px={4} shadow="base">
       <HStack justifyContent="space-between">
@@ -50,6 +53,17 @@ const Navbar = () => {
           {navData.map((data) => (
             <NavLink key={data.path} {...data} />
           ))}
+        </HStack>
+        <HStack>
+          <Button
+            _focusVisible={{ shadow: "outline" }}
+            _focus={{ shadow: "none" }}
+            colorScheme={"facebook"}
+            variant={"ghost"}
+            onClick={user ? signOut : signInWithGoogle}
+          >
+            {user ? "Sign Out" : "Sign In"}
+          </Button>
         </HStack>
       </HStack>
     </Box>

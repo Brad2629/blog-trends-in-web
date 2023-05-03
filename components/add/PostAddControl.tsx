@@ -1,25 +1,35 @@
-import { Button, VStack, Input, Textarea, Spacer, HStack } from "@chakra-ui/react";
-import { addDoc, collection } from "firebase/firestore";
-import { FormEventHandler, useState } from "react";
-import { Post } from "../../types";
-import { db } from "../../util/firebase";
+import {
+  Button,
+  VStack,
+  Input,
+  Textarea,
+  Spacer,
+  HStack,
+} from "@chakra-ui/react"
+import { addDoc, collection } from "firebase/firestore"
+import { FormEventHandler, useState } from "react"
+import { Post } from "../../types"
+import { db } from "../../util/firebase"
+import { useAuth } from "../auth/AuthUserProvider"
 
 const PostAddControl = () => {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [title, setTitle] = useState("")
+  const [text, setText] = useState("")
+  const { user } = useAuth()
 
   const PostAdd: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    if (title === "" || text === "") return;
+    e.preventDefault()
+    if (title === "" || text === "") return
     const post: Post = {
       title: title,
       text: text,
       likes: 0,
-    };
-    addDoc(collection(db, "posts"), post);
-    setTitle("");
-    setText("");
-  };
+      owner: user!.email!,
+    }
+    addDoc(collection(db, "posts"), post)
+    setTitle("")
+    setText("")
+  }
 
   return (
     <form onSubmit={PostAdd}>
@@ -40,11 +50,16 @@ const PostAddControl = () => {
         />
         <Spacer />
         <HStack justifyContent="flex-end">
-          <Button type="submit">Post</Button>
+          <Button
+            type="submit"
+            disabled={user === undefined || user === null ? true : false}
+          >
+            Post
+          </Button>
         </HStack>
       </VStack>
     </form>
-  );
-};
+  )
+}
 
-export default PostAddControl;
+export default PostAddControl
