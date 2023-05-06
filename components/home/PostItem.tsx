@@ -25,10 +25,18 @@ const PostItem = ({ post: { id, title, text, likes, owner } }: Props) => {
 
   const toggleLike = () => {
     setLiked(!liked)
+    const postDoc = doc(collection(db, "posts"), id)
+    !liked ? (
+      updateDoc(postDoc, { likes: likes + 1 })
+    ) : (
+      updateDoc(postDoc, { likes: Math.max(0, likes - 1) })
+    )
+
   }
   const iconFontSize = "24px"
   return (
     <Box position="relative">
+
       <IconButton
         aria-label="Like post"
         icon={
@@ -47,6 +55,12 @@ const PostItem = ({ post: { id, title, text, likes, owner } }: Props) => {
         bg="white"
         boxSize={iconFontSize}
       />
+      <Text fontSize="small" position="absolute"
+        right={2}
+        top={4}>
+        {likes}
+      </Text>
+
       <VStack
         style={{
           backgroundColor: "white",
@@ -66,13 +80,14 @@ const PostItem = ({ post: { id, title, text, likes, owner } }: Props) => {
           >
             {title}
           </Text>
-            <Text fontSize="small" color="gray.500">
-              from {owner}
-            </Text>
-          <Box borderTop="1px solid" borderColor="gray.200" pt={1}>
-          <Text fontStyle="italic" mt={2}>
-            {text}
+          <Text fontSize="small" color="gray.500">
+            from {owner}
           </Text>
+
+          <Box borderTop="1px solid" borderColor="gray.200" pt={1}>
+            <Text fontStyle="italic" mt={2}>
+              {text}
+            </Text>
           </Box>
         </VStack>
       </VStack>
