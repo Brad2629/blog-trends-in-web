@@ -1,24 +1,8 @@
-import { DeleteIcon } from "@chakra-ui/icons"
 import {
-  Button,
-  Checkbox,
-  Container,
-  Heading,
-  HStack,
-  Icon,
-  IconButton,
   Text,
   VStack,
 } from "@chakra-ui/react"
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore"
 import { PostWithId } from "../../types"
-import { db } from "../../util/firebase"
 import PostItem from "./PostItem"
 
 type Props = {
@@ -31,7 +15,7 @@ const PostList = ({ posts }: Props) => {
       {posts.length ? (
         posts.map((post) => <PostItem key={post.id} post={post} />)
       ) : (
-        <Text>The list is looking kinda empty 👀</Text>
+        <Text>No post yet. Log in and click on the Add button to make the first one!</Text>
       )}
     </VStack>
   )
