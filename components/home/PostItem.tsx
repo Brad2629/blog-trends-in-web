@@ -12,6 +12,7 @@ import { PostWithId } from "../../types"
 import { db } from "../../util/firebase"
 import { AiOutlineHeart } from "react-icons/ai"
 import { AiFillHeart } from "react-icons/ai"
+import { BsFillTrashFill } from "react-icons/bs"
 import { useAuth } from "../auth/AuthUserProvider"
 import { useState } from "react"
 
@@ -22,21 +23,37 @@ type Props = {
 const PostItem = ({ post: { id, title, text, likes, owner } }: Props) => {
   const { user } = useAuth()
   const [liked, setLiked] = useState(false)
+  const [deleteButton, setDeleteButton] = useState(false)
 
   const toggleLike = () => {
     setLiked(!liked)
     const postDoc = doc(collection(db, "posts"), id)
-    !liked ? (
-      updateDoc(postDoc, { likes: likes + 1 })
-    ) : (
-      updateDoc(postDoc, { likes: Math.max(0, likes - 1) })
-    )
-
+    !liked
+      ? updateDoc(postDoc, { likes: likes + 1 })
+      : updateDoc(postDoc, { likes: Math.max(0, likes - 1) })
   }
-  const iconFontSize = "24px"
-  return (
-    <Box position="relative">
 
+  const handleMouseEnter = () => {
+    setDeleteButton(true)
+  }
+
+  const handleMouseLeave = () => {
+    setDeleteButton(false)
+  }
+
+  const deletePost = () => {
+    const taskDoc = doc(collection(db, "posts"), id)
+    deleteDoc(taskDoc)
+  }
+
+  const iconFontSize = "24px"
+
+  return (
+    <Box
+      position="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <IconButton
         aria-label="Like post"
         icon={
@@ -54,12 +71,30 @@ const PostItem = ({ post: { id, title, text, likes, owner } }: Props) => {
         color={liked ? "red" : undefined}
         bg="white"
         boxSize={iconFontSize}
+        disabled={user === undefined || user === null ? true : false}
       />
-      <Text fontSize="small" position="absolute"
-        right={2}
-        top={4}>
+      <Text fontSize="small" position="absolute" right={2} top={4}>
         {likes}
       </Text>
+
+      {deleteButton &&
+        user !== undefined &&
+        user !== null &&
+        user!.email! === owner && (
+          <IconButton
+            aria-label="Delete post"
+            icon={<BsFillTrashFill fontSize={iconFontSize} />}
+            position="absolute"
+            left={720}
+            top={4}
+            zIndex={1}
+            color="red"
+            bg="white"
+            boxSize={iconFontSize}
+            onClick={deletePost}
+            disabled={user === undefined || user === null ? true : false}
+          />
+        )}
 
       <VStack
         style={{
@@ -96,5 +131,3 @@ const PostItem = ({ post: { id, title, text, likes, owner } }: Props) => {
 }
 
 export default PostItem
-
-

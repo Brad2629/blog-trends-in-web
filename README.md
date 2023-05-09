@@ -1,20 +1,17 @@
 # blog-trends-in-web
 
-Description:
+## Description
 
-Our final project web app will be a forum similar to Reddit where users can create posts and comment on each other’s posts. Users will be presented to a homepage with all posts in the database. They can view all posts on the homepage and interact with a post by liking it or clicking on it. When a user clicks on a post, the post’s individual page where they can add a comment on the post and like the post. The user has to login in order to comment on the post or interact with the post. On the homepage, the user can create a new post, leading them to a create post web page that includes title, text, and a create post button.
+Our final project web app will be a simplified version of a forum similar to Reddit where users can create their own posts, delete them, and interact with each other's posts. The user must be logged in using Google to be able to create, delete, or like a post. Users will be presented with a homepage with all the posts currently in the database. They can interact with all the posts by clicking the heart icon on the specific post. When users hover over their own post, they are able to click the trash icon that appears to delete their own post. The user can create a new post using the Add button in the navigation bar, leading them to a create post page that includes a title, description, and a create post button.
 
-Group members and NetIDs:
+## Group Members and NetIDs
 
-Bradley Paliska bp355
+**Bradley Paliska** bp355  
+**Sue Ni** sn456  
+**Tony Chen** tc448
 
-Sue Ni sn456
-
-Tony Chen tc448
-
-Link to deployed site:
-
-
+Link to the deployed site:
+https://blog-trends-in-web-git-main-brad2629.vercel.app/
 
 Link to the GitHub repo:
 https://github.com/Brad2629/blog-trends-in-web
